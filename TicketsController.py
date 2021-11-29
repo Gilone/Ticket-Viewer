@@ -37,6 +37,13 @@ class Controller:
                 self.view.invalid_command()
                 self.view.start_menu()
 
+    def _check_response_error(self, response):
+        if response[0]:
+            return response[1]
+        else:
+            self.view.error_message(response[1])
+            sys.exit()       
+        
     def _display_page_listener(self, display_current, page_number):
         while (True):
             self._set_input()
@@ -62,12 +69,7 @@ class Controller:
         while (True):
             self._set_input()
             if self.current_input.isdigit():
-                response = self.model.get_ticket(self.current_input)
-                if response[0]:
-                    ticket = response[1]
-                else:
-                    self.view.error_message(response[1])
-                    sys.exit()
+                ticket = self._check_response_error(self.model.get_ticket(self.current_input))
                 self.view.search_ticket(ticket)
             elif (self.current_input == "exit"):
                 sys.exit()
@@ -82,12 +84,7 @@ class Controller:
     def display_page(self):
         page_number = math.ceil(self.ticket_number/self.pagesize)
         def display_current():
-            response = self.model.get_ticket_of_page(self.current_page)
-            if response[0]:
-                ticket_list = response[1]
-            else:
-                self.view.error_message(response[1])
-                sys.exit()
+            ticket_list = self._check_response_error(self.model.get_ticket_of_page(self.current_page))
             self.view.display_ticket_list(self.current_page, page_number, self.pagesize, ticket_list)
         display_current()
         self._display_page_listener(display_current, page_number)
