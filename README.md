@@ -19,7 +19,7 @@ It has two basic funtions, which are displaying ticktes list page by page and se
 
 ## Demo
 
-![Page Display](https://github.com/Gilone/Ticket-Viewer/blob/main/demo.png)
+![Page Display](https://github.com/Gilone/Ticket-Viewer/blob/main/demo.png)  
 we got 4 page total results, with the data provide in [Test JSON](https://gist.github.com/svizzari/c7ffed8e10d3a456b40ac9d18f34289c).  
 There are totally 100 tickets, and 25 tickets in each page.  
 
